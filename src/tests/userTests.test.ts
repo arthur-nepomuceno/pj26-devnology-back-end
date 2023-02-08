@@ -51,7 +51,7 @@ describe(`
 
     it.todo('Must return status 406 if email does not exist at the database');
 
-    it.todo('Must return status 409 if password is incorrect.')
+    it.todo('Must return status 409 if password is incorrect.');
 
 })
 
