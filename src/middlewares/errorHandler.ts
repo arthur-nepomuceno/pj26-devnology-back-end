@@ -14,8 +14,8 @@ function errorHandler(error: Error | any, req: Request, res: Response, next: Nex
 
     if (type === 'invalid_email') return res.status(status.not_acceptable).send(message);
     if (type === 'password_and_confirm_password_do_not_match') return res.status(status.conflict).send(message);
-    if (type === 'unknown_email') return res.status(status.unauthorized).send(message);
-    if (type === 'invalid_password') return res.status(status.unauthorized).send(message);
+    if (type === 'invalid_password') return res.status(status.conflict).send(message);
+    if (type === 'unknown_email') return res.status(status.not_acceptable).send(message);
 
     return res.status(500).send(`Unexpected server error: ${error}`);
 }
