@@ -1,7 +1,7 @@
 import supertest from "supertest";
-import app from "../app";
-import prisma from "../database";
-import { createUser } from "./factories/userFactory";
+import app from "../../app";
+import prisma from "../../database";
+import { createUser } from "../factories/userFactory";
 
 const agent = supertest(app);
 const user = createUser();
@@ -11,7 +11,7 @@ beforeEach(async () => {
 })
 
 describe(`
-    END-ṔOINT: post/signup
+    END-POINT: post/signup
     TESTING: Create new user.
 `, () => {
 
