@@ -15,7 +15,10 @@ describe(`
     TESTING: Create new user.
 `, () => {
 
-    it('Must return status 409 if password and confirm password inputs are different.', async () => {
+    it(`
+        TEST CASE: Password and confirm password inputs are different.
+        EXPECTED: Must return status 409.
+    `, async () => {
         const response = await agent.post('/signup').send({
             email: user.email,
             password: user.password,
@@ -25,7 +28,10 @@ describe(`
         expect(response.statusCode).toBe(409);
     });
     
-    it('Must return status 406 if the email already exists at the database', async () => {
+    it(`
+        TEST CASE: Email already exists at the database.
+        EXPECTED: Must return status 406. 
+    `, async () => {
         await agent.post('/signup').send(user);
         
         const response = await agent.post('/signup').send(user);
@@ -33,7 +39,10 @@ describe(`
         expect(response.statusCode).toBe(406)
     });
     
-    it('Must return status 201 and create a new user', async () => {
+    it(`
+        TEST CASE: Creating a new user.
+        EXPECTED: Must return status 201.
+    `, async () => {
 
         const response = await agent.post('/signup').send(user);
 
@@ -47,15 +56,57 @@ describe(`
     TESTING: User access to the system.
 `, () => {
 
-    it.todo('Must return status 200 and return a token if user logs in correctly.');
+    it(`
+        TEST CASE: Login with wrong password.
+        EXPECTED: Must return status 409.
+    `, async () => {
+        
+        await agent.post('/signup').send({
+            email: user.email,
+            password: user.password,
+            confirm: user.confirm
+        });
 
-    it.todo('Must return status 406 if email does not exist at the database');
+        const response = await agent.post('/login').send({
+            email: user.email,
+            password: 'my-intentionally-wrong-password'
+        });
 
-    it.todo('Must return status 409 if password is incorrect.');
+        expect(response.statusCode).toBe(409);
+    });
+    
+    it(`
+        TEST CASE: Login with non registered email.
+        EXPECTED: Must return status 406.
+    `,async () => {
+        
+        const response = await agent.post('/login').send({
+            email: user.email,
+            password: user.password
+        })
+
+        expect(response.statusCode).toBe(406);
+    });
+    
+    it(`
+        TEST CASE: User logs in successfully.
+        EXPECTED: Must return status 200 and return a token.
+    `, async () => {
+
+        await agent.post('/signup').send(user);
+
+        const response = await agent.post('/login').send({
+            email: user.email,
+            password: user.password
+        })
+
+        expect(response.statusCode).toBe(200);
+        expect(response.body.token).not.toBeNull();
+    });
 
 })
 
 afterAll(async () => {
-    //await prisma.$executeRaw`TRUNCATE TABLE users`;
+    await prisma.$executeRaw`TRUNCATE TABLE users`;
     await prisma.$disconnect()
 })
