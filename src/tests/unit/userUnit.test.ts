@@ -1,15 +1,15 @@
 import * as userServices from "../../services/userServices";
 import * as userRepository from "../../repositories/userRepository";
 import { faker } from "@faker-js/faker";
-import bcrypt from "bcrypt";
 import jsonwebtoken from "jsonwebtoken";
+import bcrypt from "bcrypt";
 
 const id = faker.datatype.number(10);
 const email = faker.internet.email();
 const password = faker.datatype.string();
 const confirm = faker.datatype.string();
 
-describe(`TESTING: userServices.ts`, () => {
+describe(`TESTING: userServices`, () => {
 
     it(`
         TEST: checkPasswordConfirmation
@@ -57,6 +57,21 @@ describe(`TESTING: userServices.ts`, () => {
     })
 
     it(`
+        TEST: getUserByEmail
+        EXPECTED: Must return id and email from user.
+    `, async () => {
+
+        jest.spyOn(userRepository, 'findByEmail').mockResolvedValueOnce({id, email, password});
+
+        const promise = userServices.getUserByEmail(email);
+
+        expect(promise).resolves.toMatchObject({
+            id,
+            email
+        })
+    })
+
+    it(`
         TEST: checkEmailRegister
         EXPECTED: Must return an error if the email is not registered yet.
     `, async () => {
@@ -95,7 +110,7 @@ describe(`TESTING: userServices.ts`, () => {
 
         jest.spyOn(jsonwebtoken, 'sign').mockImplementationOnce(() => {return 'this-is-a-test-token'});
 
-        const token = userServices.createUserToken(email);
+        const token = userServices.createUserToken(id, email);
 
         expect(jsonwebtoken.sign).toBeCalled();
         expect(token).not.toBeNull();

@@ -7,7 +7,7 @@ const agent = supertest(app);
 const user = createUser();
 
 beforeEach(async () => {
-    await prisma.$executeRaw`TRUNCATE TABLE users RESTART IDENTITY`;
+    await prisma.$executeRaw`TRUNCATE TABLE users RESTART IDENTITY CASCADE`;
 })
 
 describe(`
@@ -107,6 +107,6 @@ describe(`
 })
 
 afterAll(async () => {
-    await prisma.$executeRaw`TRUNCATE TABLE users`;
+    await prisma.$executeRaw`TRUNCATE TABLE users RESTART IDENTITY CASCADE`;
     await prisma.$disconnect()
 })

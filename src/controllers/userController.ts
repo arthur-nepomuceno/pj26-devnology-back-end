@@ -12,8 +12,10 @@ async function signUp(req: Request, res: Response){
     const hiddenPassword = await userServices.hidePassword(body.password);
     //registrar dados no banco de dados
     await userServices.insertUser(body.email, hiddenPassword);
-    
-    return res.status(201).send(body);
+    //responder com o registro realizado
+    const register = await userServices.getUserByEmail(body.email);
+
+    return res.status(201).send(register);
 }
 
 async function logIn(req: Request, res: Response){
@@ -24,7 +26,8 @@ async function logIn(req: Request, res: Response){
     //verificar se a senha está correta
     await userServices.checkPasswordAtLogin(body.email, body.password);
     //gerar token para o usuário
-    const token = await userServices.createUserToken(body.email);
+    const register = await userServices.getUserByEmail(body.email)
+    const token = await userServices.createUserToken(register.id, body.email);
 
     return res.status(200).send({token});
 }
