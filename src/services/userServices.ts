@@ -33,6 +33,14 @@ async function insertUser(email: string, password: string) {
     return userRepository.insert(email, password);
 }
 
+async function getUserByEmail(email: string) {
+    const register = await userRepository.findByEmail(email);
+    return {
+        id: register?.id,
+        email: register?.email
+    }
+}
+
 async function checkEmailRegister(email: string) {
     const response = await userRepository.findByEmail(email);
     
@@ -58,10 +66,10 @@ async function checkPasswordAtLogin(email: string, password: string) {
     return;
 }
 
-async function createUserToken(email: string) {
+async function createUserToken(id: number | any, email: string) {
     const secret: string | any = process.env.JWT_SECRET;
     
-    const token = jsonwebtoken.sign(email, secret);
+    const token = jsonwebtoken.sign({id, email}, secret);
 
     return token;
 }
@@ -71,6 +79,7 @@ export {
     checkPasswordConfirmation,
     hidePassword,
     insertUser,
+    getUserByEmail,
     checkEmailRegister,
     checkPasswordAtLogin,
     createUserToken
