@@ -1,19 +1,20 @@
 import * as linkServices from "../../services/linkServices";
 import * as linkRepository from "../../repositories/linkRepository";
-import * as userServices from "../../services/userServices";
 import jsonwebtoken from "jsonwebtoken";
-import { link, token, decoded } from "../factories/linkFactory";
-import { newUser } from "../factories/userFactory";
 import prisma from "../../database";
+import { newLink, token, decoded } from "../factories/linkFactory";
+import { newUser } from "../factories/userFactory";
 import { Users } from "@prisma/client";
 
 let userRegister: Users | any;
 beforeAll(async () => {
-    await prisma.$executeRaw`TRUNCATE TABLE users RESTART IDENTITY CASCADE`;
-    await prisma.$executeRaw`TRUNCATE TABLE links`;
+    const {email, password} = newUser;
 
-    await userServices.insertUser(newUser.email, newUser.password);
-    userRegister = await userServices.getUserByEmail(newUser.email);      
+    await prisma.$queryRaw`TRUNCATE TABLE users RESTART IDENTITY CASCADE`;
+    await prisma.$queryRaw`TRUNCATE TABLE links`;
+
+    await prisma.$queryRaw`INSERT INTO users(email, password) VALUES(${email}, ${password})`;
+    userRegister = await prisma.$queryRaw`SELECT * FROM users WHERE email = ${email}`;
 });
 
 describe(`TESTING: linkservices`, () => {
@@ -37,7 +38,7 @@ describe(`TESTING: linkservices`, () => {
 
         jest.spyOn(linkRepository, 'insert').mockResolvedValueOnce;
         
-        await linkServices.insertLink(userRegister.id, link.url, link.title, link.description);
+        await linkServices.insertLink(userRegister[0].id, newLink.url, newLink.title, newLink.description);
 
         expect(linkRepository.insert).toBeCalled();
     })

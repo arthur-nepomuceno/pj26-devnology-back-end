@@ -25,9 +25,13 @@ async function insert(req: Request, res: Response) {
 
 async function getAll(req: Request, res: Response){
     const headers = req.headers;
+    const token: string | any = headers.authorization?.replace(/'Bearer |'/g, '')
 
     //decodificar token
+    const user: Jwt | any = linkServices.decodeToken(token);
     //buscar todos os registros no id do usuário
+
+    
     return res.status(200).send('get links - ok');
 }
 
