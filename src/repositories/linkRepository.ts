@@ -1,6 +1,14 @@
 import prisma from "../database";
 
 async function insert(userId: number, url: string, title: string, description: string) {
+    return await prisma.links.create({
+        data: {
+            userId,
+            url,
+            title,
+            description
+        }
+    })
 }
 
 async function getAll(userId: number) {    

@@ -1,12 +1,25 @@
 import { Request, Response } from "express";
+import { Jwt } from "jsonwebtoken";
+import * as linkServices from "../services/linkServices";
 
 async function insert(req: Request, res: Response) {
     const body = req.body;
     const headers = req.headers;
+    
+    const token: string | any = headers.authorization?.replace(/Bearer |'/g, '')
 
     //decodificar token
+    const user: Jwt | any = await linkServices.decodeToken(token)
+
     //inserir link na base de dados
-    return res.status(201).send('insert link - ok');
+    await linkServices.insertLink(
+        user.id,
+        body.url,
+        body.title,
+        body.description
+    )
+
+    return res.status(201).send('Your link was added successfully.');
     
 }
 

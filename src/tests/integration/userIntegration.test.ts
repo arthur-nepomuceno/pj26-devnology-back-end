@@ -1,10 +1,9 @@
 import supertest from "supertest";
 import app from "../../app";
 import prisma from "../../database";
-import { createUser } from "../factories/userFactory";
+import { newUser } from "../factories/userFactory";
 
 const agent = supertest(app);
-const user = createUser();
 
 beforeEach(async () => {
     await prisma.$executeRaw`TRUNCATE TABLE users RESTART IDENTITY CASCADE`;
@@ -20,8 +19,8 @@ describe(`
         EXPECTED: Must return status 409.
     `, async () => {
         const response = await agent.post('/signup').send({
-            email: user.email,
-            password: user.password,
+            email: newUser.email,
+            password: newUser.password,
             confirm: 'intentionally_different_password'
         });
 
@@ -32,9 +31,9 @@ describe(`
         TEST CASE: Email already exists at the database.
         EXPECTED: Must return status 406. 
     `, async () => {
-        await agent.post('/signup').send(user);
+        await agent.post('/signup').send(newUser);
         
-        const response = await agent.post('/signup').send(user);
+        const response = await agent.post('/signup').send(newUser);
 
         expect(response.statusCode).toBe(406)
     });
@@ -44,7 +43,7 @@ describe(`
         EXPECTED: Must return status 201.
     `, async () => {
 
-        const response = await agent.post('/signup').send(user);
+        const response = await agent.post('/signup').send(newUser);
 
         expect(response.statusCode).toBe(201);
     });
@@ -62,13 +61,13 @@ describe(`
     `, async () => {
         
         await agent.post('/signup').send({
-            email: user.email,
-            password: user.password,
-            confirm: user.confirm
+            email: newUser.email,
+            password: newUser.password,
+            confirm: newUser.confirm
         });
 
         const response = await agent.post('/login').send({
-            email: user.email,
+            email: newUser.email,
             password: 'my-intentionally-wrong-password'
         });
 
@@ -81,8 +80,8 @@ describe(`
     `,async () => {
         
         const response = await agent.post('/login').send({
-            email: user.email,
-            password: user.password
+            email: newUser.email,
+            password: newUser.password
         })
 
         expect(response.statusCode).toBe(406);
@@ -93,11 +92,11 @@ describe(`
         EXPECTED: Must return status 200 and return a token.
     `, async () => {
 
-        await agent.post('/signup').send(user);
+        await agent.post('/signup').send(newUser);
 
         const response = await agent.post('/login').send({
-            email: user.email,
-            password: user.password
+            email: newUser.email,
+            password: newUser.password
         })
 
         expect(response.statusCode).toBe(200);
