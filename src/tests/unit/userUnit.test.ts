@@ -51,7 +51,7 @@ describe(`TESTING: userServices`, () => {
 
         jest.spyOn(userRepository, 'insert').mockResolvedValueOnce;
 
-        userServices.insertUser(email, password);
+        await userServices.insertUser(email, password);
 
         expect(userRepository.insert).toBeCalled();
     })

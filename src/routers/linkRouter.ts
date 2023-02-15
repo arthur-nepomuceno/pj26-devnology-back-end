@@ -7,7 +7,7 @@ const linkRouter = Router();
 
 linkRouter.post('/insertlink', checkSchema(linkSchema) ,linkController.insert);
 linkRouter.get('/getlinks', linkController.getAll);
-linkRouter.post('/edit/:id', linkController.editById);
+linkRouter.post('/edit/:id', checkSchema(linkSchema) ,linkController.editById);
 linkRouter.delete('/delete/:id', linkController.deleteById);
 
 export default linkRouter;
