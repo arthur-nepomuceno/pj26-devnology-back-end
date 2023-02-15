@@ -14,18 +14,36 @@ async function insertLink(userId: number, url: string, title: string, descriptio
 }
 
 async function getAll(userId: number) {
+    return await linkRepository.getAll(userId);
 }
 
-async function editById(userId: number, id: number, url?: string, title?: string, description?: string) {
+async function getById(id: number){
+    return await linkRepository.getById(id);
 }
 
-async function deleteById(userId: number, id: number) {
+async function checkUserLinkMatch(linkUserId: number, userId: number){
+    if(linkUserId !== userId) throw {
+        type: "invalid_user_link_match",
+        message: "_The link you are trying to alter is not yours or does not exist_"
+    }
+
+    return;
+}
+
+async function editById(id: number, userId: number, url?: string, title?: string, description?: string) {
+    return await linkRepository.editById(id, userId, url, title, description);
+}
+
+async function deleteById(id: number) {
+    return await linkRepository.deleteById(id);
 }
 
 export {
     decodeToken,
     insertLink,
     getAll,
+    getById,
+    checkUserLinkMatch,
     editById,
     deleteById
 }

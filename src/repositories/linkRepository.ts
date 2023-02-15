@@ -8,21 +8,50 @@ async function insert(userId: number, url: string, title: string, description: s
             title,
             description
         }
+    });
+}
+
+async function getAll(userId: number) {
+    return await prisma.links.findMany({
+        where: {
+            userId
+        }
+    });
+}
+
+async function getById(id: number){
+    return await prisma.links.findUnique({
+        where: {
+            id
+        }
     })
 }
 
-async function getAll(userId: number) {    
+async function editById(id: number, userId: number, url?: string, title?: string, description?: string) {
+    await prisma.links.update({
+        where: {
+            id,
+        },
+        data: {
+            url,
+            title,
+            description
+        }
+    })
 }
 
-async function editById(userId: number, id: number) {
-}
-
-async function deleteById(userId: number, id: number) {
+async function deleteById(id: number) {
+    await prisma.links.delete({
+        where: {
+            id
+        }
+    })
 }
 
 export {
     insert,
     getAll,
+    getById,
     editById,
     deleteById
 }
