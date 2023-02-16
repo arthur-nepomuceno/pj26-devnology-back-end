@@ -7,7 +7,10 @@
   "scripts": {
     "dev": "nodemon src/server.ts",
     "test": "dotenv -e .env.test prisma migrate dev && dotenv -e .env.test jest --no-cache -i",
-    "start": "ts-node src/server.ts"
+    "start": "npm run prisma migrate deploy && npm run prisma db seed && ts-node src/server.ts"
+  },
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
   },
   "keywords": [],
   "author": "",
