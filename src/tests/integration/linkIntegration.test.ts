@@ -1,6 +1,6 @@
 import prisma from "../../database.js"
-import { newUser } from "../factories/userFactory.js";
-import { newLink } from "../factories/linkFactory.js";
+import { newUser } from "../../factories/userFactory.js";
+import { newLink } from "../../factories/linkFactory.js";
 import { Users } from "@prisma/client";
 import supertest from "supertest";
 import app from "../../app.js";
@@ -48,7 +48,7 @@ describe(`
     })
 
     it(`
-        TEST CASE: user successfully adds a linkto the database.
+        TEST CASE: user successfully adds a link to the database.
         EXPECTED: Must return status 201.
     `, async () => {
 
