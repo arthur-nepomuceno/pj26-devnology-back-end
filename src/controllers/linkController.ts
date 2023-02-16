@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { Jwt, JwtPayload } from "jsonwebtoken";
-import * as linkServices from "../services/linkServices";
+import * as linkServices from "../services/linkServices.js";
 
 async function insert(req: Request, res: Response) {
     const body = req.body;

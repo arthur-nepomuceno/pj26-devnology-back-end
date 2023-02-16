@@ -1,5 +1,5 @@
-import * as userServices from "../../services/userServices";
-import * as userRepository from "../../repositories/userRepository";
+import * as userServices from "../../services/userServices.js";
+import * as userRepository from "../../repositories/userRepository.js";
 import { faker } from "@faker-js/faker";
 import jsonwebtoken from "jsonwebtoken";
 import bcrypt from "bcrypt";

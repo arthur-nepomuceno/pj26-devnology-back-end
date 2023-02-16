@@ -1,9 +1,9 @@
-import * as linkServices from "../../services/linkServices";
-import * as linkRepository from "../../repositories/linkRepository";
+import * as linkServices from "../../services/linkServices.js";
+import * as linkRepository from "../../repositories/linkRepository.js";
 import jsonwebtoken from "jsonwebtoken";
-import prisma from "../../database";
-import { newLink, token, decoded } from "../factories/linkFactory";
-import { newUser } from "../factories/userFactory";
+import prisma from "../../database.js";
+import { newLink, token, decoded } from "../factories/linkFactory.js";
+import { newUser } from "../factories/userFactory.js";
 import { Users } from "@prisma/client";
 
 let userRegister: Users | any;

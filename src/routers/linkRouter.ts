@@ -1,7 +1,7 @@
 import { Router } from "express";
-import * as linkController from "../controllers/linkController";
-import { checkSchema } from "../schemas/checkSchema";
-import { linkSchema } from "../schemas/linkSchema";
+import * as linkController from "../controllers/linkController.js";
+import { checkSchema } from "../schemas/checkSchema.js";
+import { linkSchema } from "../schemas/linkSchema.js";
 
 const linkRouter = Router();
 

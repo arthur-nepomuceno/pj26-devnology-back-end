@@ -3,10 +3,14 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
+    "build": "tsc",
+    "prisma:migrate": "prisma migrate dev",
+    "prisma:deploy": "prisma migrate deploy",
+    "dev": "nodemon src/server.ts",
     "test": "dotenv -e .env.test prisma migrate dev && dotenv -e .env.test jest --no-cache -i",
-    "start": "node src/server.ts",
-    "dev": "nodemon src/server.ts"
+    "start": "npm run prisma:deploy && ts-node src/server.ts"
   },
   "keywords": [],
   "author": "",

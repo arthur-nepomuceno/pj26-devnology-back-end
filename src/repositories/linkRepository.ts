@@ -1,4 +1,4 @@
-import prisma from "../database";
+import prisma from "../database.js";
 
 async function insert(userId: number, url: string, title: string, description: string) {
     return await prisma.links.create({

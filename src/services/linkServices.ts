@@ -1,4 +1,4 @@
-import * as linkRepository from "../repositories/linkRepository";
+import * as linkRepository from "../repositories/linkRepository.js";
 import jsonwebtoken from "jsonwebtoken";
 import dotenv from "dotenv";
 dotenv.config();

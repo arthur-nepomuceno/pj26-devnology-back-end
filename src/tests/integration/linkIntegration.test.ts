@@ -1,9 +1,9 @@
-import prisma from "../../database"
-import { newUser } from "../factories/userFactory";
-import { newLink } from "../factories/linkFactory";
+import prisma from "../../database.js"
+import { newUser } from "../factories/userFactory.js";
+import { newLink } from "../factories/linkFactory.js";
 import { Users } from "@prisma/client";
 import supertest from "supertest";
-import app from "../../app";
+import app from "../../app.js";
 import jsonwebtoken from "jsonwebtoken";
 import dotenv from "dotenv";
 dotenv.config();
