@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
+    "dev": "nodemon src/server.ts",
     "test": "dotenv -e .env.test prisma migrate dev && dotenv -e .env.test jest --no-cache -i",
-    "start": "node src/server.ts",
-    "dev": "nodemon src/server.ts"
+    "start": "ts-node src/server.ts"
   },
   "keywords": [],
   "author": "",
