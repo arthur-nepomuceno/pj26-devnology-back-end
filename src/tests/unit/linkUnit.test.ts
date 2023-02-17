@@ -17,7 +17,7 @@ beforeAll(async () => {
     userRegister = await prisma.$queryRaw`SELECT * FROM users WHERE email = ${email}`;
 });
 
-describe(`TESTING: linkservices`, () => {
+describe(`TESTING: linkServices`, () => {
     
     it(`
         TEST: decodeToken,
