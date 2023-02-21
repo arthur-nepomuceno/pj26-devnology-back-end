@@ -11,10 +11,6 @@
    <img src="https://img.shields.io/badge/autor-Arthur Nepomuceno-093D04?style=flat-square" />
 </p>
 
-## Comece aqui
-
-
-
 ## Sumário
    - [Apresentação](#apresentação)
    - [Introdução](#introdução)
@@ -26,12 +22,12 @@
 
 
 ## Apresentação
-   Este projeto é uma API para armenamento de links. Objetivo é prover uma plataforma onde o usuário possa se cadastrar e então manter um acompanhamento dos seus links favoritos, que podem ser de todo e qualquer tipo.
+   Este projeto é uma API para armazenamento de links. O objetivo é prover uma plataforma onde o usuário possa se cadastrar e então manter um acompanhamento dos seus links favoritos, que podem ser de todo e qualquer tipo. Após cadastrar-se, um usuário deve poder adicionar, visualizar, editar e excluir links.
    
 ***
 
 ## Introdução
-   Este é um projeto desenvolvido em TypeScript. Os testes foram desenvolvidos com Jest e Supertest. O banco de dados foi desenvolvido com Prisma. Suas entidades são:
+   Este projeto é desenvolvido com TypeScript. Os testes foram desenvolvidos com Jest e Supertest. O banco de dados foi desenvolvido com Prisma. Suas entidades são:
    - _users_: tabela de registro para os usuários do sistema. Cada pessoa deve se registrar antes de ter aceso as demais funcionalidades.
    - _links_: tabela que guarda as informações dos links registrados pelos usuários, contento título, endereço do link e sua descrição.
    
@@ -39,29 +35,84 @@
 
 ## Conceitos e Tecnologias
     - amazon web services
+         Utilizado para deploy deste back-end, acessível pelo endereço de IP público 54.209.15.185:80.
+    
     - docker
     - docker-compose
+         Utilizados na criação da imagem e containerização deste sistema.
+    
     - TDD
+         Conceito aplicado no desenvolvimento desta API, 
+         algumas vezes escrevendo os casos dos testes antes do desenvolvimento do código.
+    
     - testes unitários
     - testes de integração
     - jest
     - supertest
-    - typeScript
-    - nodeJs
-    - nodemon
-    - express
-    - express-async-errors
-    - cors
-    - dotenv
-    - postgreSQL
+         Testes desenvolvidos com Jest e Supertest, 
+         para testagem automatizada dos end-points e dos serviços desta aplicação.
+         
     - faker
+         Biblioteca utilizada para gerar dados aleatórios durante a execução dos testes.
+    
+    - typeScript
+         Linguagem de programação, derivada do JavaScript, utilizada para o desenvolvimento desta API.
+    
+    - nodeJs
+         Plataforma que permite a execução de códigos JavaScript fora dos navegadores da web.
+    
+    - nodemon
+         Ferramenta que permite maior velocidade na renderização do projeto ao longo do seu desenvolvimento.
+         
+    - express
+         Biblioteca de serviços a partir dos quais é possível transformar a máquina local em um servidor para a execução do código.
+         
+    - express-async-errors
+         Biblioteca utilizada para tratar e administrar os erros no processo de desenvolvimento e utilização desta API.
+         
+    - cors
+         Biblioteca responsável por viabilizar as requisições feitas no endereço de funcionamento desta API.
+    
+    - dotenv
+         Biblioteca responsável por viabilizar o uso das variáveis de ambiente neste projeto.
+         
+    - postgreSQL
+         Banco de dados escolhido para esta aplicação.
+         
+    - prisma ORM
+         Ferramenta que permite a criação e manipulação do banco de dados diretamente pelo editor de código.
+         
     - jsonwebtoken
+         Biblioteca utilizada para geração de tokens no processo de autenticação desta API. (login e acesso).
 
 ***
 
 ## Rodando a aplicação
 
 ### Com Docker
+Para utilizar esta opção, você precisa garantir que possui tanto o Docker quanto o Docker Compose instalados e disponíveis para uso na sua máquina. Caso não possua, você pode acessar o site oficial do Docker e seguir as instruções para a instalação fornecidas na documentação, clicando [aqui](https://docs.docker.com/).
+
+Uma vez que você tenha essas ferramentas instaladas, faça o clone desse repositório na sua máquina:
+
+```
+git clone https://github.com/arthur-nepomuceno/pj26-devnology-back-end.git
+```
+
+Depois, dentro da pasta, rode o seguinte comando para inicializar a aplicação.
+
+```
+docker-compose up -d
+```
+Se tudo derto, você receberá uma mensagem final do tipo:
+
+```
+Starting devnology-docker ... done
+```
+Deste ponto em diante, você pode utilizar esta API através do endereço de IP sua máquina local, na porta 5000. Por exemplo:
+
+```
+localhost:5000/signup
+```
 
 ### Sem Docker
 Este projeto foi inicializado com o Node Package Manager, então certifique-se que voce tem a ultima versão estável do [Node.js](https://nodejs.org/en/download/) e [npm](https://www.npmjs.com/) rodando localmente.
@@ -134,228 +185,59 @@ POST /insertlink
 ```
 
 ```yml
-GET /tests/disciplines
-    - Rota para o usuário visualizar as provas separadas por disciplina.
+GET /getlinks
+    - Rota para o usuário visualizar todos os links que já registrou.
     - headers: {Authorization: `Bearer token-created-with-jsonwebtoken`}
     - params: {}
     - query: {}
     - body: {}
     - response: [
-    {
-        "term": 2,
-        "tests": [
-            {
-                "discipline": "JavaScript",
-                "categories": [
-                    {
-                        "category": "Projeto",
-                        "testName": "test_1"
-                        "teacher": "Diego Pinho",
-                        "pdfUrl": "http://pdf_link.com"
-                    },
-                    {
-                        "category": "Prática",
-                        "testName": "test_2"
-                        "teacher": "Diego Pinho",
-                        "pdfUrl": "http://pdf_link.com"
-                    },
-                    {
-                        "category": "Recuperação,
-                        "testName": "test_3"
-                        "teacher": "Diego Pinho",
-                        "pdfUrl": "http://pdf_link.com"
-                    }
-                ]
-            },
-            {
-                "discipline": "Planejamento",
-                "categories": [
-                    {
-                        "category": "Projeto",
-                        "testName": "test_4"
-                        "teacher": "Bruna Hamori",
-                        "pdfUrl": "http://pdf_link.com"
-                    },
-                    {
-                        "category": "Prática",
-                        "testName": "test_5"
-                        "teacher": "Bruna Hamori",
-                        "pdfUrl": "http://pdf_link.com"
-                    },
-                    {
-                        "category": "Recuperação",
-                        "testName": "test_6"
-                        "teacher": "Bruna Hamori",
-                        "pdfUrl": "http://pdf_link.com"
-                    }
-                ]
-            }
-        ]
-    },
-    {
-        "term": 3,
-        "tests": [
-            {
-                "discipline": "React",
-                "categories": [
-                    {
-                        "category": "Projeto",
-                        "testName": "test_7"
-                        "teacher": "Diego Pinho",
-                        "pdfUrl": "http://pdf_link.com"
-                    },
-                    {
-                        "category": "Prática",
-                        "testName": "test_8"
-                        "teacher": "Diego Pinho",
-                        "pdfUrl": "http://pdf_link.com"
-                    },
-                    {
-                        "category": "Recuperação,
-                        "testName": "test_9"
-                        "teacher": "Diego Pinho",
-                        "pdfUrl": "http://pdf_link.com"
-                    }
-                ]
-            },
-            {
-                "discipline": "Autoconfiança",
-                "categories": [
-                    {
-                        "category": "Projeto",
-                        "testName": "test_10"
-                        "teacher": "Bruna Hamori",
-                        "pdfUrl": "http://pdf_link.com"
-                    },
-                    {
-                        "category": "Prática",
-                        "testName": "test_11"
-                        "teacher": "Bruna Hamori",
-                        "pdfUrl": "http://pdf_link.com"
-                    },
-                    {
-                        "category": "Recuperação",
-                        "testName": "test_12"
-                        "teacher": "Bruna Hamori",
-                        "pdfUrl": "http://pdf_link.com"
-                    }
-                ]
-            }
-        ]
-    }
-]
+       {
+         "id": 1,
+         "userId": 1,
+         "url": "https://devgo.com.br/",
+         "title": "Blog DevGo",
+         "description": "Um blog para ficar por dentro do mundo da programação e do senvoldimento web."
+       }
+     ]
 ```
 
 ```yml
-GET /tests/teachers
-    - Rota para o usuário visualizar as provas separadas por professor.
+POST /edit/:id
+    - Rota para o usuário editar um de seus links.   
     - headers: {Authorization: `Bearer token-created-with-jsonwebtoken`}
-    - params: {}
-    - query: {}
-    - body: {}
-    - response: [
-    {
-        "teacher": Bruna Hamori,
-        "tests": [
-            {
-                "term": "2",
-                "disciplines": [
-                    {
-                        "discipline": "JavaScript",
-                        "category": "Projeto",
-                        "testName": "test_1",
-                        "pdfUrl": "http://pdf_link.com"
-                    },
-                    {
-                        "discipline": "JavaScript",
-                        "category": "Prática",
-                        "testName": "test_2",
-                        "pdfUrl": "http://pdf_link.com"
-                    },
-                    {
-                        "discipline": "JavaScript",
-                        "category": "Recuperação,
-                        "testName": "test_3",
-                        "pdfUrl": "http://pdf_link.com"
-                    }
-                ]
-            },
-            {
-                "term": 3,
-                "disciplines": [
-                    {
-                        "discipline": "React",
-                        "category": "Projeto",
-                        "testName": "test_4",
-                        "pdfUrl": "http://pdf_link.com"
-                    },
-                    {
-                        "discipline": "React",
-                        "category": "Prática",
-                        "testName": "test_5",
-                        "pdfUrl": "http://pdf_link.com"
-                    },
-                    {
-                        "discipline": "React",
-                        "category": "Recuperação",
-                        "testName": "test_6",
-                        "pdfUrl": "http://pdf_link.com"
-                    }
-                ]
-            }
-        ]
-    },
-    {
-        "teacher": "Diego Pinho",
-        "tests": [
-            {
-                "term": 1,
-                "disciplines": [
-                    {
-                        "discipline": "Humildade",
-                        "category": "Projeto",
-                        "testName": "test_7",
-                        "pdfUrl": "http://pdf_link.com"
-                    },
-                    {
-                        "discipline": "Humildade",
-                        "category": "Prática",
-                        "testName": "test_8",
-                        "pdfUrl": "http://pdf_link.com"
-                    },
-                    {
-                        "discipline": "Humildade",
-                        "category": "Recuperação,
-                        "testName": "test_9",
-                        "pdfUrl": "http://pdf_link.com"
-                    }
-                ]
-            },
-            {
-                "term": 3,
-                "disciplines": [
-                    {
-                        "discipline": "Autoconfiança",
-                        "category": "Projeto",
-                        "testName": "test_10",
-                        "pdfUrl": "http://pdf_link.com"
-                    },
-                    {
-                        "discipline": "Autoconfiança",
-                        "category": "Prática",
-                        "testName": "test_11",
-                        "pdfUrl": "http://pdf_link.com"
-                    },
-                    {
-                        "discipline": "Autoconfiança",
-                        "category": "Recuperação",
-                        "testName": "test_12",
-                        "pdfUrl": "http://pdf_link.com"
-                    }
-                ]
-            }
-        ]
+    - params: {
+         id: 1
     }
-]
+    - query: {}
+    - body: {
+        "url": "https://this-is-the-new-link.com/",
+        "title": "This is the new title",
+        "description": "This is the new description."
+    }
+    - response: {
+        "id": 1,
+        "userId": 1,
+        "url": "https://this-is-the-new-link.com/",
+        "title": "This is the new title",
+        "description": "This is the new description."
+    }
 ```
+
+```yml
+DELETE /delete/:id
+    - Rota para o usuário deletar um de seus links.
+        - headers: {Authorization: `Bearer token-created-with-jsonwebtoken`}
+    - params: {
+         id: 1
+    }
+    - query: {}
+    - body: {
+        "url": "https://this-is-the-new-link.com/",
+        "title": "This is the new title",
+        "description": "This is the new description."
+    }
+    - response: 'Link deleted.'
+```
+
 ###### [voltar para o sumário](#sumário)
