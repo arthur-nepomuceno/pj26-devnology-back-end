@@ -86,6 +86,8 @@
     - jsonwebtoken
          Biblioteca utilizada para geração de tokens no processo de autenticação desta API. (login e acesso).
 
+###### [voltar para o sumário](#sumário)
+
 ***
 
 ## Rodando a aplicação
@@ -114,6 +116,7 @@ Deste ponto em diante, você pode utilizar esta API através do endereço de IP 
 ```
 localhost:5000/signup
 ```
+###### [voltar para o sumário](#sumário)
 
 ### Sem Docker
 Este projeto foi inicializado com o Node Package Manager, então certifique-se que voce tem a ultima versão estável do [Node.js](https://nodejs.org/en/download/) e [npm](https://www.npmjs.com/) rodando localmente.
