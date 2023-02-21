@@ -42,8 +42,8 @@
          Utilizados na criação da imagem e containerização deste sistema.
     
     - TDD
-         Conceito aplicado no desenvolvimento desta API, 
-         algumas vezes escrevendo os casos dos testes antes do desenvolvimento do código.
+         Test Driven Development. Conceito aplicado no desenvolvimento desta API, 
+         escrevendo os casos dos testes antes do desenvolvimento do código.
     
     - testes unitários
     - testes de integração
@@ -65,7 +65,8 @@
          Ferramenta que permite maior velocidade na renderização do projeto ao longo do seu desenvolvimento.
          
     - express
-         Biblioteca de serviços a partir dos quais é possível transformar a máquina local em um servidor para a execução do código.
+         Biblioteca de serviços a partir dos quais é possível transformar 
+         a máquina local em um servidor para a execução do código.
          
     - express-async-errors
          Biblioteca utilizada para tratar e administrar os erros no processo de desenvolvimento e utilização desta API.
@@ -108,7 +109,7 @@ Se tudo derto, você receberá uma mensagem final do tipo:
 ```
 Starting devnology-docker ... done
 ```
-Deste ponto em diante, você pode utilizar esta API através do endereço de IP sua máquina local, na porta 5000. Por exemplo:
+Deste ponto em diante, você pode utilizar esta API através do endereço de IP da sua máquina local, na porta 5000. Por exemplo:
 
 ```
 localhost:5000/signup
@@ -117,19 +118,19 @@ localhost:5000/signup
 ### Sem Docker
 Este projeto foi inicializado com o Node Package Manager, então certifique-se que voce tem a ultima versão estável do [Node.js](https://nodejs.org/en/download/) e [npm](https://www.npmjs.com/) rodando localmente.
 
-Primeiro, faça o clone desse repositório na sua maquina:
+Primeiro, faça o clone desse repositório na sua máquina:
 
 ```
 git clone https://github.com/arthur-nepomuceno/pj26-devnology-back-end.git
 ```
 
-Depois, dentro da pasta, rode o seguinte comando para instalar as dependencias.
+Depois, dentro da pasta, rode o seguinte comando para instalar as dependências.
 
 ```
 npm install
 ```
 
-Finalizado o processo, é só inicializar o servidor
+Finalizado o processo, é só inicializar o servidor.
 ```
 npm run dev
 ```
@@ -195,9 +196,9 @@ GET /getlinks
        {
          "id": 1,
          "userId": 1,
-         "url": "https://devgo.com.br/",
-         "title": "Blog DevGo",
-         "description": "Um blog para ficar por dentro do mundo da programação e do senvoldimento web."
+         "url": "my_link_title",
+         "title": "http://my_link_address.com",
+         "description": "my link description"
        }
      ]
 ```
@@ -232,11 +233,7 @@ DELETE /delete/:id
          id: 1
     }
     - query: {}
-    - body: {
-        "url": "https://this-is-the-new-link.com/",
-        "title": "This is the new title",
-        "description": "This is the new description."
-    }
+    - body: {}
     - response: 'Link deleted.'
 ```
 
