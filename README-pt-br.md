@@ -2,7 +2,7 @@
 [![en](https://img.shields.io/badge/lang-en-blue.svg)](https://github.com/arthur-nepomuceno/pj26-devnology-back-end/blob/master/README.md)
 
 <p align="center">
-   <img src="https://notion-emojis.s3-us-west-2.amazonaws.com/prod/svg-twitter/1f4dd.svg" alt="FavLinks" style="width: 89px; height: 89px"/>
+   <img src="logo.png" alt="FavLinks" style="width: 121px; height: 121px"/>
 </p>
 
 ## <p align = "center">  - FavLinks - </p>
